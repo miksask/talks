@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Git: Назад, в будущее!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../vendor/shower/styles/purple-16x9.css">
+    <link rel="stylesheet" href="../vendor/shower/vendors/highlight/styles/github.css">
+    <script>
+        let my_work_em = 'bmlrb2xheS5zYXNrb3ZldHNAaXRlY2hhcnQtZ3JvdXAuY29t';
+        let my_home_em = 'c2h1cnBoQGdtYWlsLmNvbQ==';
+
+        let put = str => document.write(str);
+        let putsecure = str => put(atob(str));
+    </script>
+    <style>
+    h1,h2,h3,h4,h5,h6,h7 {
+         font-family: PT Sans Narrow;
+    }
+    .slide {
+        /* font-size: 32px; /**/
+        
+        /* line-height: 1.6; /***/
+    }
+    .slide code {
+        /* background: none; */
+    }
+    .slide .strike:after {
+        background-color: red;
+    }
+    .slide.red .strike:after {
+        background-color: black;
+        height: 9px;
+    }
+
+    .slide:before {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        width: 200px;
+        height: 30px;
+        background-size: fit;
+        /* background-image: url("../git-brest/pictures/logos/itechart-black.svg"); */
+        background-postion: bottom right;
+        background-repeat: no-repeat;
+    }
+
+    .slide.black:before,
+    .slide.red-dark:before,
+    .slide.red:before {
+        filter: invert(1);
+    }
+    
+    .slide:after {
+        background: transparent url('../git-brest/pictures/system/slide-number-bg.svg') center center no-repeat;
+        background-size: 70px;
+        border-radius: 0;
+        width: 70px;
+        font-size: 0.95em;
+    }
+    .slide.black:after {
+        background-color: transparent;
+        color: darkgray;
+        filter: invert(1) sepia(1); 
+    }
+    .slide.red-dark:after,
+    .slide.red:after {
+        background-color: transparent;
+        color:darkgoldenrod;
+        filter: grayscale(1) invert(1) contrast(3);
+    }
+    
+
+    .slide.red-dark {
+        background-color: #680000
+    }
+    .slide.red-dark:after {
+        color: #680000
+    }
+
+    .slide.no-logo:before {
+        display: none;
+    }
+
+    .slide h2, /* disable border on all slides */
+    .slide h2.no-border, .slide h2.no-line {
+        border-bottom: none;
+    }
+    .cards > div {
+        width: 33.33%;
+        float: left;
+        line-height: 1.6;
+    }
+
+    .tags-baloons {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 40px;
+    }
+    .tags-baloons .label {
+        border-radius: 15px 20px;
+        margin-bottom: 15px;
+    }
+    .slide-footer.author,
+    .slide-footer.notable {
+        font-size: 20px;
+        padding: 20px 40px;
+    }
+    .slide footer {
+        color: black;
+        padding: 10px;
+    }
+
+    .slide-footer small {
+        font-size: 12px;
+    }
+
+    .lighty {
+            color: rgba(0,0,0, 0.45);
+    }
+
+    .slide.black  .lighty,
+    .slide.red .lighty {
+        color: rgba(255,255,255, 0.45);
+    }
+
+    .huge {
+        font-size: 42px;
+    }
+    .padding {
+        padding-left: 150px;
+        padding-top: 50px;
+    }
+    .padding-sm {
+        padding-left: 150px;
+        padding-top: 25px;
+    }
+
+    .text-stroke-white {
+        color: white !important;
+        text-shadow:
+         -1px -1px 0 #000,  
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+           1px 1px 0 #000;
+    }
+    </style>
+</head>
+
+<body class="shower list">
+    <header class="caption">
+        <h1>Git: Назад, в будущее!</h1>
+        <p>
+            <a href="https://shurph.github.io/talks/">Mikalai Saskavets</a>
+        </p>
+    </header>
+
+    <section class="slide clear no-logo" style="background-image: linear-gradient( 109.6deg, rgba(156,252,248,1) 11.2%, rgba(110,123,251,1) 91.1% );">
+       <!-- PLACEHOLDER TO THE FIRST SPLASH SCREEN <img class="cover" src="..."> -->
+    </section>
+
+
+
+    <section class="slide black clear"
+     style="
+        background: url('../git-brest/pictures/doc-and-marty.jpg') center center;
+        background-size: cover;">
+        <h2 class="shout text-stroke-white" style="font-size: 82px; white-space: nowrap;">
+            <br><br><br>
+            Git: Назад, в будущее!
+        </h2>
+        <h3 class="shout text-stroke-white" style="font-size: 39.5px; white-space: nowrap;">
+            <br><br><br>
+            <br><br><br>
+            <br><br><br><br>
+            Исправляем ошибки в истории <span style="opacity: 42%">[репозитория]</span>
+        </h3>
+        <span class="slide-footer" style="font-size: 20px; padding: 5px 10px 7px 10px; color: white; background: rgba(0,0,0,0.75);">
+            Mikalai Saskavets<br>
+        </span>
+        <div  class="place top left" style="opacity: 0.75; padding: 20px 0 0 40px;font-size: 20px; color: white;">
+            <!-- PLACEHOLDER FOR AN MEETUP NAME -->>
+        </div>
+
+        <footer>
+        </footer>
+    </section>
+
+
+
+
+
+
+    <section class="slide">
+
+        <h2 class="shout">
+            F*CKUPS
+        </h2>
+
+        <footer></footer>
+    </section>
+
+
+
+
+
+
+    <section class="slide">
+
+        <h2 class="shout">
+            F*CKUPS
+        </h2>
+        <h2 class="shout" style="font-size: 50px; margin-top: 70px;">
+            and Git
+        </h2>
+
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <div style="width: 50%; float: left;  font-size: 25px; line-height: 1.5; padding-right: 30px; margin-top: -30px">
+            <span>I committed and immediately realized I need to make one small change!</span>
+            <br><br>
+            <div style="padding-right: 100px;">
+                <span>I did something terribly wrong</span>
+                <br><br>
+                <span>I need to change the message on my last commit!</span>
+            </div>
+            <br>
+            <span>I accidentally committed something to master that should have been on a brand new branch!</span>
+        </div>
+        <div style="width: 50%; float: left; font-size: 25px; line-height: 1.5; padding-left: 30px; margin-top: -30px">
+            <span>I accidentally committed to the wrong branch!</span>
+            <br><br>
+            <div style="padding-left: 120px;">
+                <span>I tried to run a diff but nothing happened?!</span>
+                <br><br>
+                <span>I need to undo a commit from like 5 commits ago!</span>
+
+            </div>
+            <br>
+            <span>I need to undo my changes to a file!</span>
+            <br><br>
+            <span>F*ck this noise, I give up!</span>
+        </div>
+
+        <div class="slide-footer lighty">
+        based on <a href="https://ohshitgit.com/" target="_blank">ohshitgit.com</a>
+        </div>
+
+        <img class="cover" style="width: 205px;" src="../git-brest/pictures/this-is-fine-fallback.png">
+        <img class="cover"                       src="https://reactiongifs.me/wp-content/uploads/2014/04/nobody-cares-about-my-facebook-computer-guy.gif">
+        <img class="cover"                       src="../git-brest/pictures/an_ignored_by_git_place/computer-guy.gif">
+        <footer></footer>
+    </section>
+
+
+
+
+
+
+    <section class="slide">
+
+        <h2 class="no-border" style="font-size: 111px; line-height: 1.12">
+            WHAT TO DO<br>
+            WITH<br>
+            F*CKUPS<br>?
+        </h2>
+        <div style="padding-left: 400px; padding-top: 100px; font-size: 62px; line-height: 0.5">
+            <p><span style="font-size: 52px; color: gray;">1. Prevent them</span></p>
+            <p>2. Fix them</p>
+            <p><span style="font-size: 32px; color: darkgray;">3. Minimize damage from them</span></p>
+            <p style="font-size: 22px; color: lightgray;">4. Hide them</p>
+        </div>
+
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide black" style="background-color: #191919">
+
+        <img class="place left"  src="../git-brest/pictures/yoda-baby.png" style="margin-left:200px; width: 180px">
+        <div style="float: left; width: 50%; color: white; text-align:center;">
+            <div style="transform: translatey(25px)">
+                <span>FIX</span>
+            </div>
+            <div style="transform: translatey(230px)">
+                <span>FIX</span>
+            </div>
+        </div>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide black" style="background-color: #191919">
+
+        <img class="place left"  src="../git-brest/pictures/yoda-baby.png" style="margin-left:200px; width: 180px">
+        <img class="place right" src="../git-brest/pictures/yoda-master.png" style="margin-right:200px; width: 180px">
+        <div style="float: left; width: 50%; color: white; text-align:center;">
+            <div style="transform: translatey(25px)">
+                <span>FIX</span>
+            </div>
+            <div style="transform: translatey(230px)">
+                <span>FIX</span>
+            </div>
+        </div>
+        <div style="float: left; width: 50%; color: white; text-align:center;">
+            <div style="transform: translatey(-15px)">
+                <span style="display: inline-block; transform: translate(-70px, 35px) rotate(-45deg)">FIX</span>
+                <span>FIX</span>
+                <span style="display: inline-block; transform: translate(70px, 35px) rotate(45deg)">FIX</span>
+            </div>
+            <div style="transform: translatey(270px)">
+                <span style="display: inline-block; transform: translate(-70px, -35px) rotate(-135deg)">FIX</span>
+                <span>FIX</span>
+                <span style="display: inline-block; transform: translate(70px, -35px) rotate(135deg)">FIX</span>
+            </div>
+        </div>
+        <footer></footer>
+    </section>
+
+
+
+
+
+
+
+
+    <section class="slide">
+        <h2 class="shout">FIX or PREVENT?</h2>
+        <footer></footer>
+    </section>
+
+
+
+
+    <section class="slide">
+        <h2 class="shout">CASES</h2>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">IMPORTANT ONES</h2>
+
+
+
+        <h2 class="shout" style="line-height: 1.2; font-size: 52px/***/">
+
+            Misnaming (Authorship Issues)
+            <!-- (wrong commit author / sign misconfiguration) -->
+            <br><br>
+            Data Leaks<br><br>
+        </h2>
+        <h3 class="shout" style="line-height: 1.2; font-size: 28px/***/">
+            <br><br><br><br><br>
+            
+            Confidential Data Exposure +  Credentials Compromise
+            <!-- (sensitive information leakage) -->
+            
+        </h3>
+
+        <footer>
+            в истории коммитов оказались файлы с "сенситивной" информацией
+            <br> коммиты закоммитились не от того имени (без четкого имени)
+        </footer>
+    </section>
+
+
+
+
+    <section class="slide">
+        <h2 class="shout">Misnaming <br>(Authorship Issues)</h2>
+        <footer></footer>
+    </section>
+
+
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: What are the causes?</h2>
+        <ol "padding huge">
+            <li>Unconfigured <code>git config user.name/user.email</code></li>
+            <li>Different configs on different machines</li>
+            <li>Commits from the not own machine</li>
+        </ol>
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">Unconfigured <code>git config</code></h2>
+        By Default:<br>
+        <code>
+            git config user.name "$(id -F)"
+        </code>
+        <br>
+        <code>
+            git config user.email "$(id -un)@$(hostname)"
+        </code>
+        <br><br>
+        <h3>as example:</h3>
+        <code>Mik &lt;dev@lightstar.local></code><br>
+
+        <footer></footer>
+    </section>
+    
+    
+    <section class="slide ">
+        <h2 class="">Unconfigured <code>git config</code>: AWS</h2>
+        <pre><code class="plain" style="margin-top: -2em;">
+<span style="color:darkblue">git log --format="%h %an &lt;%ae>" -n 5</span>
+f14246a <span style="color:red">Ubuntu &lt;ubuntu@ip-192-168-1-13.ec2.internal></span>
+fa2b394 Ubuntu &lt;ubuntu@ip-192-168-1-17.ec2.internal>
+da23946 Ubuntu &lt;ubuntu@ip-192-168-1-18.ec2.internal>
+4098403 Ubuntu &lt;ubuntu@ip-192-168-1-21.ec2.internal>
+e3f335d Ubuntu &lt;ubuntu@ip-192-168-1-22.ec2.internal>
+</code></pre>
+
+
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">Different configs on different machines</h2>
+        <pre><code class="plain" style="margin-top: -2em;">
+<span style="color:darkblue">git log --format="%h %an &lt;%ae>" -n 5 --abbrev=4</span>
+b323 <span style="color:red">Mik &lt;dev@lightstar.local&gt;</span>
+1746 <span style="color:red">Nikolay Saskovets &lt;<script>putsecure(my_work_em)</script>&gt;</span>
+0825 Mikalai Saskavets &lt;<script>putsecure(my_home_em)</script>&gt;
+71f4 Mikalai Saskavets &lt;<script>putsecure(my_home_em)</script>&gt;
+340c Mikalai Saskavets &lt;<script>putsecure(my_home_em)</script>&gt;
+</code></pre>
+        <footer></footer>
+    </section>
+
+
+    <section class="slide ">
+        <h2 class="">Commits from the not own machine</h2>
+        
+        <pre><code class="plain" style="margin-top: -2em;">
+<span style="color:darkblue">git log --format="%h %an &lt;%ae>" -n 5</span>
+3ba40cd Aleh Kogot &lt;aleh@example.com&gt;
+323ba44 Aleh Kogot &lt;aleh@example.com&gt;
+8258534 <span style="color:red">Alena Kogot &lt;alena@mail.ru&gt;</span>
+b323833 Aleh Kogot &lt;aleh@example.com&gt;
+40cd7e2 Aleh Kogot &lt;aleh@example.com&gt;
+</code></pre>
+
+        <footer>
+            История про девопса Олежу и, откуда не возьмись, коммиты от имени Алёны.
+            Это точно его жена! Я всегда так говорю со сцены.
+        </footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">Misnaming: Why it's important? Part 1:</h2>
+
+        <h3 class="shout">git blame</h3>
+        <h3 class="shout" style="font-size: 50px; margin-top: 70px;">
+            (annotate)
+        </h3>
+        <img src="../git-brest/pictures/emoji/thinking-face.svg" class="place center bottom">
+
+        <footer></footer>
+    </section>
+
+
+    <section class="slide">
+        <h2 class=""><br>Misnaming: Why it's important? Part 2:</h2>
+        <img src="../git-brest/pictures/copyright-agreement.jpg" alt="" class="cover">
+
+        <h3 class="shout">copyright</h3>
+
+
+        <footer>
+            В одной компании пришли юристы и попросили подписать вот такие документы.
+            В документе говориться что сотрудник передаёт свои имущественные авторски права компании.
+            И в документе прямо четко прописано - с какого емейла, с какого аккаунта, в какой репозиторий должен сотрудник коммитать.
+            И всё бы хорошо, но было у нас девопс Олежа, который, предположительно, коммитал с компьютера жены, и откуда-то в истории появлялась Алёна.
+            Да и другие сотрудники любили покомитить с экзотических емейлов: кошечка98, нагибатор07 и т.д.
+
+            В общем, работы по исправлению истории гита было много, чтобы удовлетворить запросы компании.
+
+            А почему вообще компании такое запрашивают? (тут переход на следующий слайд)
+        </div>
+
+        </footer>
+    </section>
+    
+    <section class="slide no-logo" data-note="RAMBLER">
+        <img src="../git-brest/pictures/judges-hammer.gif" alt="" class="cover w">
+
+        <img src="../git-brest/pictures/logos/rambler.png" alt="" class="bottom right">
+
+
+        <footer>
+            Потому что они иногда хотят засудить своих нерадивых разработчиков, когда те как-то используют спорную интеллектуальную собственность.
+
+            Как сделал, например, Рамблер, который в 2019 году засудил Илью Сысоева, разработчика вебсервера Энджинкс.
+            Дело в том, что Иля разрабатывал свой Энджинкс в лохматом 2002-м году, когда он работал в Рамблере.
+            И вот у Рамблера возникло желание отсудить этот продукт у Ильи... интеллектуальная собственность, копирайт, все дела...
+
+            В итоге Илье Сысоеву всё-таки удалось отбиться от юристов Рамблера, но эпопея эта длилась больше полугода в юрисдикции РФ,
+            и ещё дольше в Сан-Франциско, аж до марта 2021 года!
+
+            Так что с авторскими правами надо очень аккуратно поступать.
+        </footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: How to prevent?</h2>
+        <h3>As a developer</h3>
+        ~/.gitconfig<br>
+        <pre class="plain" style="border: 2px solid black">
+            <code>
+            [user]
+                name =
+                email =
+            </code>
+        </pre>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: Result of prevention</h2>
+
+        <pre class="plain" style="/* border: 2px solid black; /***/ ">
+            <code style="line-height: 1.3">git commit -m MESSAGE
+*** Please tell me who you are.
+Run
+<span style="color: red;" class="">
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+</span>
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+<span style="color: red">
+fatal: empty ident name (for <>) not allowed</span></code>
+        </pre>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: BE CAREFUL</h2>
+
+        <pre class="plain" style="/* border: 2px solid black; /***/ ">
+            <code style="line-height: 1.3">git commit -m MESSAGE
+*** Please tell me who you are.
+Run
+<span style="color: red; display: inline-block;" class="strike">
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+</span>
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+<span style="color: red">
+fatal: empty ident name (for <>) not allowed</span></code>
+        </pre>
+        <footer></footer>
+    </section>
+
+
+
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: How to prevent? RIGHT WAY</h2>
+
+        <h3>As a developer</h3>
+        On each branch:<br>
+        <pre class="plain" style="border: 2px solid black; ">
+            <code style="line-height: 1.3"> git config user.email "you@example.com"
+ git config user.name "Your Name"</code>
+        </pre>
+
+        <h3 class="shout " style="font-size: 72px; margin-top: 30px;"><span class="strike">--global</span></h3>
+
+
+        <br>
+        ~/.gitconfig<br>
+        <pre class="plain" style="border: 2px solid black; ">
+            <code style="line-height: 1.3">    [user]
+        name =
+        email = </code>
+        </pre>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: How to prevent?</h2>
+        <h3>As a master</h3>
+        <h4>Set Up CI/CD Pipeline with appropriate checks</h4>
+        Example:
+        <pre class="plain" style="border: 2px solid black">
+            <code>
+  if f"{author.name} <{author.email}>" not in WHITELIST:
+      exit(1)
+            </code>
+        </pre>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+
+        <h2 class="shout">
+            FIX IT!
+        </h2>
+        <h2 class="shout" style="font-size: 50px; margin-top: 70px;">
+            at least try
+        </h2>
+
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: How to fix?</h2>
+        <h3 class="shout">Is it only the one commit on the top of the history?</h3>
+
+        <img src="../git-brest/pictures/emoji/thinking-face.svg" class="place bottom center">
+        <footer></footer>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: How to fix: Only one commit on the top</h2>
+        <img src="../git-brest/pictures/congratulations-so-lucky.jpg" class="place center">
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">Misnaming: How to fix: Only one commit on the top</h2>
+        <code class="huge" style="background: none; font-size: 36px;">git config user.email "you@example.com"</code><br>
+        <code class="huge" style="background: none; font-size: 36px;">git config user.name "Your Name"</code><br><br>
+        <code class="huge" style="font-size: 36px;">git commit --amend --reset-author</code>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Misnaming: How to fix: Few commits, deep in history</h2>
+        <img src="../git-brest/pictures/congratulations-so-lucky.jpg" class="place center">
+        <img src="../git-brest/pictures/sarcasm-badge.jpg" class="place center right" style="height:300px;">
+        <footer></footer>
+    </section>
+
+
+    <section class="slide ">
+        <h2 class="">Misnaming: How to fix?</h2>
+        <div class="place middle center" style="    background: white;
+            width: 70px;
+            height: 70px;
+            margin-left: -200px;
+            margin-top: 10px;">
+            <!-- empty div to hide green mark for the right answer -->
+        </div>
+        <img class="cover h" src="../git-brest/pictures/stack-screen-author-amend.png">
+        <img style="width: 300px; transform: translate(222px, -28px)" src="../git-brest/pictures/logos/stackoverflow.png">
+        <footer></footer>
+    </section>
+
+    <section class="slide ">
+        <h2 class="">Misnaming: How to fix? *1545 votes</h2>
+        <pre><code class="plain">
+git rebase -i -p <span style="color: green">a8d2013</span>  <span style="color: gray"># &lt;-- hash of the last good commit
+# ... mark all needed commits as "edit"
+# ... then ... on each commit:</span>
+git commit --amend --author "Bo &lt;bo@co.mp&gt;" --no-edit
+git rebase --continue
+        </code></pre>
+
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">Misnaming: Don't use <code style="font-size: 42px">git commit --author</code>!</h2>
+        <code>git commit --amend --author "Bo &lt;bo@co.mp&gt;"</code>
+        <pre><code style="line-height: 1.5" class="plain">
+>>> git log --format=fuller
+commit e7ea301 (HEAD -> master)
+Author:     Bo &lt;bo@co.mp&gt;
+AuthorDate: Mon Jan 13 14:25:13 2020 +0300
+Commit:     <span style="color: red">Mikalai Saskavets &lt;<script>putsecure(my_home_em)</script>&gt;</span>
+CommitDate: Tue Jan 28 12:39:31 2020 +0300
+
+    Пример тестового коммита
+        </code></pre>
+
+        <footer></footer>
+    </section>
+
+
+    <section class="slide ">
+        <h2 class="">Misnaming: How to fix? *1545 votes</h2>
+        <pre><code style="line-height: 1.5" class="plain">git rebase -i -p <span style="color: green">a8d2013</span>  <span style="color: gray"># &lt;-- hash of the last good commit
+# ... mark all needed commits as "edit"
+# ... then ... on each commit:</span>
+git \
+    -c user.name="Bo" \
+    -c user.email=&lt;bo@co.mp&gt; \
+    commit --amend \
+    --reset-author --no-edit
+git rebase --continue
+        </code></pre>
+
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide ">
+        <h2 class="">Misnaming: How to fix? *1126 votes</h2>
+        <pre><code style="line-height: 1.2; font-size: 24px; margin-top:-20px">git filter-branch --env-filter '
+OLD_EMAIL="<script>putsecure(my_home_em)</script>"
+CORRECT_NAME="Bo"
+CORRECT_EMAIL="bo@co.mp"
+if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_COMMITTER_NAME="$CORRECT_NAME"
+    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$CORRECT_NAME"
+    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+fi
+' --tag-name-filter cat -- --branches --tags
+        </code></pre>
+        <footer></footer>
+    </section>
+
+
+    <section class="slide ">
+        <h2 class="">Misnaming: How to fix? *1126 votes</h2>
+        <pre><code style="line-height: 1.2; font-size: 24px; margin-top:-20px">git filter-branch --env-filter '
+        some shell magick here
+' --tag-name-filter cat -- --branches --tags
+        </code></pre>
+        <footer></footer>
+    </section>
+
+    <section class="slide ">
+        <h2 class="">Misnaming: How to fix? *1126 votes</h2>
+
+        <pre><code style="line-height: 1.2; font-size: 24px; margin-top:-20px"># some shell magick:
+OLD_EMAIL="<script>putsecure(my_home_em)</script>"
+CORRECT_NAME="Bo"
+CORRECT_EMAIL="bo@co.mp"
+if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_COMMITTER_NAME="$CORRECT_NAME"
+    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$CORRECT_NAME"
+    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+fi
+        </code></pre>
+        <footer></footer>
+    </section>
+
+
+    <section class="slide ">
+        <h2 class="">Git env variables</h2>
+        <pre><code class="plain" style="line-height: 1.2; font-size: 24px; margin-top:-20px">
+    # just a reminder:
+
+    GIT_COMMITTER_NAME
+    GIT_COMMITTER_EMAIL
+    GIT_COMMITTER_DATE
+
+    GIT_AUTHOR_NAME
+    GIT_AUTHOR_EMAIL
+    GIT_AUTHOR_DATE
+
+    EMAIL
+        </code></pre>
+        <footer></footer>
+    </section>
+
+
+
+
+    <section class="slide">
+        <h2 class="">WELL DONE?</h2>
+        A few more steps left ...
+        <h3>1. SINK UP WITH THE SERVER*</h3>
+        <h3>2. SINK UP WITH THE TEAM**</h3>
+        <footer></footer>
+    </section>
+
+
+
+
+
+    <section class="slide">
+        <h2 class="shout">
+            Data Leaks<br><br>
+        </h2>
+        <h3 class="shout" style="font-size: 52px;">
+            <br><br><br><br><br>
+                Confidential Data Exposure
+            <hr>
+            Credentials Compromise
+        </h3>
+        <footer></footer>
+    </section>
+
+
+
+
+
+    <section class="slide">
+        <h2 class="no-line">Data Leaks</h2>
+        <ol class="padding-sm  huge">
+
+          <li>what are the causes?</li>
+          <li>why it's important?</li>
+          <li>how to prevent?</li>
+          <li>how to fix?</li>
+        </ol>
+        <footer></footer>
+    </section>
+
+
+    <section class="slide ">
+        <h2 class="">Data Leaks: What are the causes?</h2>
+        <img class="place right center" style="width: 500px" src="../git-brest/pictures/chik-chirik-i-v-prodakhen.png">
+
+        <h3>&ldquo;Human reliability&rdquo;</h3>
+        <ul>
+        <li>inattentiveness</li>
+        <li>rush</li>
+        <li>insufficient training</li>
+        <li>carelessness</li>
+        </ul>
+
+        <footer></footer>
+    </section>
+
+    <section class="slide ">
+        <h2 class="">Data Leaks: What are the causes?</h2>
+        <img class="place right center" style="width: 500px" src="../git-brest/pictures/chik-chirik-i-v-prodakhen.png">
+        <br>
+        <h3>Tech causes (or results?)</h3>
+        <ul>
+        <li>PRODUCTION.SQL in the repo</li>
+        <li>AWS KEY in the settings-production.ini </li>
+        <li>DATABASE PASSWORD in the settings-production.ini </li>
+        </ul>
+
+        <footer></footer>
+    </section>
+
+
+
+
+    <section class="slide ">
+        <h2 class="">Credentials Compromise: why it's important?</h2>
+        <img class="cover" src="../git-brest/pictures/github-search-results-aws-key.png">
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Data Leak: why it's important?</h2>
+        <img  class="cover h" src="../git-brest/pictures/your-competitors-happy-with-your-data.png" alt="">
+        <h3 class="place middle right" style="transform: translate(-115px,-135px);"><sup>↖</sup>your competitor</h3>
+        <h3 class="place middle right" style="transform: translate(-368px,-62px); font-size: 32px;">
+            your
+            <br>
+            <span style=" display: inline-block; transform: translate(-28px,-7px);">data</span>
+        </h3>
+        <footer></footer>
+    </section>
+
+
+    <section class="slide" style="background-color: #f2bed1">
+        <h2 class="">Data Leak: why it's important?</h2>
+        <img  class="cover"style="width:800px" src="../git-brest/pictures/gdpr-punishment.png" alt="">
+        <div class="slide-footer lighty"><small>img from <a href="https://www.coredna.com/blogs/gdpr-fines">coredna.com</a></small></div>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Credentials Compromise: how to prevent?</h2>
+        <h3>As a developer</h3>
+
+        <ul>
+            <li>Set Up Your git <mark>pre-commit hooks</mark></li>
+            <ul>
+              <li>gittyleaks, git-secrets, repo-supervisor, truffleHog, git-hound</li>
+            </ul>
+            <li>cross your fingers</li>
+        </ul>
+
+        <footer></footer>
+    </section>
+
+
+
+    
+    <section class="slide">
+        <h2 class="">Confidential Data Exposure: how to prevent?</h2>
+        <h3>As a developer</h3>
+
+        <ul>
+            <li><mark>be carefull and mindfulness</mark></li>
+            <li>cross your fingers</li>
+        </ul>
+
+        <footer></footer>
+    </section>
+
+
+
+    
+
+    <section class="slide">
+        <h2 class="">Credentials Compromise: how to prevent?</h2>
+        <h3>As a master</h3>
+
+        <ul>
+          <li>Set Up Your CI/CD</li>
+            <ul>
+              <li>gittyleaks, git-secrets, repo-supervisor, truffleHog, git-hound</li>
+            </ul>
+          <li>cross your fingers</li>
+        </ul>
+        <footer></footer>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="">Confidential Data Exposure: how to prevent?</h2>
+        <h3>As a master</h3>
+
+        <ul>
+          <li>cross your fingers</li>
+        </ul>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="shout">cross your fingers</h2>
+        <img src="../git-brest/pictures/emoji/thinking-face.svg" class="place center" style="margin-top: 130px">
+    </section>
+
+
+
+    <section class="slide">
+
+        <h2 class="shout">
+            FIX IT!
+        </h2>
+        <h2 class="shout" style="font-size: 50px; margin-top: 70px;">
+            at least try
+        </h2>
+
+        <footer></footer>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="">Credentials Compromise</h2>
+        <h3>How to fix</h3>
+        It's outside the current topic
+        <footer></footer>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="">Confidential Data Exposure</h2>
+        <h3>How to fix</h3>
+        <ul>
+            <li>Delete from local git</li>
+            <li>Delete from the git server</li>
+            <li>Delete from the Internet</li>
+        </ul>
+        <footer></footer>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="">Confidential Data Exposure Fix: Naive approach</h2>
+        <h3># Step 1</h3>
+        <pre><code class="huge plain" style="line-height: 1.2">git rm DUMP.SQL</code></pre>
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">Confidential Data Exposure Fix: Naive approach</h2>
+        <h3># Step 2</h3>
+        <pre><code class="huge plain" style="line-height: 1.2">git rm DUMP.SQL
+git rebase -i $(<mark>magick</mark> DUMP.SQL)</code></pre>
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">Confidential Data Exposure Fix: Naive approach</h2>
+        <h3># Step 3</h3>
+        <pre><code class="huge plain" style="line-height: 1.2">git rm DUMP.SQL
+git rebase -i \
+    $(
+        git log --format="%h" \
+        --follow --diff-filter=A \
+        -- DUMP.SQL
+    )</code></pre>
+        
+        <footer></footer>
+    </section>
+
+
+
+
+    <section class="slide black">
+        <h2 class="shout" style="color:white; text-shadow: 2px 2px black">AUTOMATE IT?</h2>
+        <img src="../git-brest/pictures/automate-it-fallback.png" class="cover w">
+        <img src="https://media.giphy.com/media/8qrrHSsrK9xpknGVNF/giphy.gif" class="cover w">
+        <img src="../git-brest/pictures/an_ignored_by_git_place/automate-it.gif" class="cover w">
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">Confidential Data Exposure Fix Automation</h2>
+        <pre><code class="plain" style="line-height: 1.2; font-size: 29px;">git filter-branch --force --index-filter \<br>
+    'git rm --cached --ignore-unmatch DUMP.SQL' \<br>
+    --prune-empty --tag-name-filter cat -- --all</code></pre>
+        <footer></footer>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="">Confidential Data Exposure Fix Automation: Easy</h2>
+        <center style="padding-top: 10px;"><h3 class="" style="font-size: 56px; color: rgb(64, 64, 64);">
+            bfg --delete-files DUMP.SQL
+        </h3>
+        </center>
+        <img class="place bottom center" src="https://i.gifer.com/LFpx.gif" style="width: 600px">
+        <img class="place bottom center" src="../git-brest/pictures/an_ignored_by_git_place/easy--peasy.gif" style="width: 600px">
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">WELL DONE?</h2>
+        A few more steps left ...
+        <h3>1. SINK UP WITH THE SERVER*</h3>
+        <h3>2. SINK UP WITH THE TEAM**</h3>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 style="text-align: center;">HOW TO KEEP<br>EVERYTHING</h2>
+        <img class="place center" src="../git-brest/pictures/baby-and-sand.jpg" style="height: 50%">
+        <h3 class="place bottom" style="text-align: center;">IN SYNC<br>?<br><br></h3>
+
+        <footer></footer>
+    </section>
+
+
+
+
+
+    <section class="slide">
+        <h2 class="shout">SINK UP WITH THE SERVER</h2>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">SINK UP WITH THE SERVER</h2>
+
+        <h2 class="shout" style="font-size: 56px;">
+            git push --force --all --prune
+        </h2>
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="">SINK UP WITH THE SERVER</h2>
+
+        <h2 class="shout">THE CACHE</h2>
+        <h2 class="shout" style="font-size: 50px; margin-top: 70px;">
+            do not forget about it!
+        </h2>
+
+        <footer></footer>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="shout">SINK UP WITH THE TEAM</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="">SINK UP WITH THE TEAM : WRONG WAY</h2>
+
+        <h2 class="shout"><span class="strike">git pull</span></h2>
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">SINK UP WITH THE TEAM : PRETTY GOOD WAY</h2>
+
+        <pre><code style="line-height: 1.5; font-size: 36px">
+git fetch --all --tags;
+git reset origin --hard;
+git branch -D $(git branch|grep -v '*');
+git clean -x -d -f;
+        </code></pre>
+        <footer></footer>
+    </section>
+
+    <section class="slide ">
+        <h2 class="">SINK UP WITH THE TEAM : SAFE/EASY WAY</h2>
+
+        <h2 class="shout" style="color: #33aa66">git clone</h2>
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">WELL&nbsp;&nbsp;DONE</h2>
+
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">TOOLS<span ></span></h2>
+        <h2 class="shout" style="font-size: 50px; margin-top: 70px;">
+            just a reminder
+        </h2>
+
+        <footer></footer>
+    </section>
+
+    <section class="slide">
+        <h2 class="">TOOLS<span ></span></h2>
+        <h3>Tools to prevent issues</h3>
+        <B>CI/CD:</B> Gitlab CI, Jenkins, TravisCI, CircleCI, etc<br>
+        <B>Analisys:</B> gittyleaks, git-secrets, repo-supervisor, truffleHog, git-hound
+        <br><br>
+        <h3>Tools to fix issues</h3>
+        Git<br>
+        BFG
+
+        <footer></footer>
+    </section>
+
+
+
+    <section class="slide ">
+        <h2 class="shout">Conclusion<span ></span></h2>
+
+
+        <footer>
+        </footer>
+    </section>
+
+
+
+
+    <section class="slide ">
+        <h2 class="">Conclusion<span ></span></h2>
+        <style>
+            .big-number {
+                font-size: 512px;
+                color: gainsboro;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                margin-top: -200px
+            }
+        </style>
+        <div class="cover big-number">1</div>
+        <h3 class="shout" style="font-size: 56px">git filter-branch <br>is<br> &ldquo;doomsday weapon&rdquo;</h3>
+
+        <footer>
+        </footer>
+    </section>
+    <section class="slide ">
+        <h2 class="">Conclusion<span ></span></h2>
+
+        <div class="cover big-number">2</div>
+        <h3 class="shout" style="font-size: 56px">prevention is better than cure </h3>
+
+        <footer>
+        </footer>
+    </section>
+
+
+    <section class="slide clear no-logo black">
+        <img src="https://hackernoon.com/hn-images/1*QPSlOyQ0EeJG169-JBYOUQ.gif" class="cover h" style="height: 107%; max-height: 107%;">
+        <img src="../git-brest/pictures/an_ignored_by_git_place/bruce-god-code.gif" class="cover h" style="height: 107%; max-height: 107%;">
+        <footer></footer>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ###################### NO SLIDES BELOW !!! ###################### <!-- -->
+    <div class="progress"></div>
+    <footer class="badge"><a href="https://github.com/shurph/talks">Fork me on GitHub!</a></footer>
+    <script src="../vendor/shower/scripts/shower.min.js"></script>
+    <script src="../vendor/shower/vendors/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+
+</html>
+

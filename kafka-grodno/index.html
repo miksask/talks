@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Django в мире микросервисов и Kafka</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<link id="favicon" rel="shortcut icon" type="image/png" href="data:image/png;base64,">-->
+
+    <link rel="stylesheet" href="../vendor/shower/styles/purple-16x9.css">
+    <link rel="stylesheet" href="../vendor/shower/vendors/highlight/styles/github.css">
+    <style>
+
+    .cards > div {
+        width: 33.33%;
+        float: left;
+        line-height: 1.6;
+    }
+
+    .tags-baloons {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 40px;
+    }
+    .tags-baloons .label {
+        border-radius: 15px 20px;
+        margin-bottom: 15px;
+    }
+    .slide-footer.author,
+    .slide-footer.notable {
+        font-size: 20px;
+        padding: 20px 40px;
+    }
+    .slide footer {
+        color: black;
+        padding: 10px;
+    }
+    h1,h2,h3,h4,h5,h6,h7 {
+         font-family: PT Sans Narrow;
+    }
+    .slide {
+        /* font-size: 32px; /**/
+
+        /* line-height: 1.6; /***/
+    }
+    .slide code {
+        /* background: none; */
+    }
+    .slide .strike:after {
+        background-color: red;
+    }
+    .slide.red .strike:after {
+        background-color: black;
+        height: 9px;
+    }
+
+    .slide:before {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        width: 200px;
+        height: 30px;
+        background-size: fit;
+        background-image: url("pictures/logos/itechart-black.svg");
+        background-postion: bottom right;
+        background-repeat: no-repeat;
+    }
+
+    .slide.black:before,
+    .slide.red-dark:before,
+    .slide.red:before {
+        filter: invert(1);
+    }
+
+    .slide:after {
+        background: transparent url('pictures/system/slide-number-bg.svg') center center no-repeat;
+        background-size: 70px;
+        border-radius: 0;
+        width: 70px;
+        font-size: 0.95em;
+    }
+    .slide.black:after {
+        background-color: transparent;
+        color: darkgray;
+        filter: invert(1) sepia(1);
+    }
+    .slide.red-dark:after,
+    .slide.red:after {
+        background: transparent url('pictures/system/slide-number-bg-white.svg') center center no-repeat;
+        color:red;
+    }
+
+
+    .slide.red-dark {
+        background-color: #680000
+    }
+    .slide.red-dark:after {
+        color: #680000
+    }
+
+    .slide.no-logo:before {
+        display: none;
+    }
+
+    .slide h2, /* disable border on all slides */
+    .slide h2.no-border, .slide h2.no-line {
+        border-bottom: none;
+    }
+    .cards > div {
+        width: 33.33%;
+        float: left;
+        line-height: 1.6;
+    }
+
+    .tags-baloons {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 40px;
+    }
+    .tags-baloons .label {
+        border-radius: 15px 20px;
+        margin-bottom: 15px;
+    }
+    .slide-footer.author,
+    .slide-footer.notable {
+        font-size: 20px;
+        padding: 20px 40px;
+    }
+    .slide footer {
+        color: black;
+        padding: 10px;
+    }
+
+    .slide-footer small {
+        font-size: 12px;
+    }
+
+    .lighty {
+            color: rgba(0,0,0, 0.45);
+    }
+
+    .slide.black  .lighty,
+    .slide.red .lighty {
+        color: rgba(255,255,255, 0.45);
+    }
+
+
+    .slide .shout.smaller {
+        font-size: 58px;
+    }
+    .slide .shout.smaller-more {
+        font-size: 42px;
+    }
+    .huge {
+        font-size: 42px;
+    }
+    .semi-huge {
+        font-size: 32px;
+    }
+    .padding {
+        padding-left: 150px;
+        padding-top: 50px;
+    }
+    .padding-sm {
+        padding-left: 150px;
+        padding-top: 25px;
+    }
+    .bg-gradient-pink {
+        background: rgb(240,111,170); background: linear-gradient(100deg, rgba(240,111,170,1) 0%, rgba(157,122,184,1) 100%);
+    }
+    
+    
+    .slide pre code.normal-in-center {
+        margin: 0; padding:0; margin-top: -2.5em; line-height: 1; font-size:22px; width: 100%; overflow: hidden;
+    }
+    
+    .slide pre code.normal-in-center.huge {
+        line-height: 1.3; font-size:28px;
+    }
+    
+    .slide pre code.normal-in-center.no-skip-first-line {
+        margin-top: -1.3em; 
+    }
+    .underlined-block {
+        display: inline-block; border-bottom: 5px solid red; padding-bottom: 0.25rem; width: 100%
+    }
+    </style>
+</head>
+
+<body class="shower list">
+    <header class="caption">
+        <!-- <h1>Bring Django to the microservices world using Kafka</h1> -->
+        <h1>Django в мире микросервисов и Kafka</h1>
+
+        <p>
+            <a href="https://github.com/shurph/talks">Mikalai Saskavets</a>
+        </p>
+    </header>
+
+    <section class="slide clear no-logo">
+        <img class="place center center" alt="" src="pictures/logos/itechmeetup.svg" style="width: 60%">
+        <img class="cover w" alt="" src="pictures/system/itechmeetup-bg-waves.jpg" style="width: 101%; max-width: 101%;">
+        <h3 class="shout" style="transform: translate(21%, 50%); font-family: Arial Narrow;">Grodno#5</h3>
+        <!-- /* TODO: GIF COVER */ -->
+        <video class="place center center" width="101%" height="101%" autoplay loop>
+            <source type="video/mp4" src="https://gist.githubusercontent.com/shurph/bfa63f44b5c5742c51f7ba0f2401f660/raw/ee28612882e4e6a29e8322e2021190e6e147930b/grodno-5-meetup-splashscreen.mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+
+
+    <section class="slide clear no-logo">
+        <img src="https://avatars.mds.yandex.net/get-zen_doc/1841592/pub_5ce45b5ecc128400b01863ef_5ce46a52856cd5031a70bfd6/scale_2400"
+            class="place left center"
+            style="width: 25%; margin-left: 150px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Kafka5jahre.jpg"
+            class="place right center"
+            style="width: 22.5%; margin-right:150px;">
+        <img src="https://images.eksmo.ru/images/kafka_2.jpg" class="cover w">
+        <h2 class="shout" style="font-size: 42px; white-space: nowrap; padding: 5px 0 10px 0; color: black; background: rgba(255,255,255,0.75)">
+            Django в мире микросервисов и Kafka
+        </h2>
+        <span class="slide-footer" style="font-size: 20px; padding: 10px 20px;  color: black; background: rgba(255,255,255,0.75)">
+            Mikalai Saskavets
+            <br>
+            <small>@ iTechArt-Group</small>
+
+        </span>
+        <div  class="place top left" style="margin: 20px 0 0 40px; padding: 0 20px; font-size: 20px; color: black; background: rgba(255,255,255,0.75)">
+            iTechMeetup Grodno #5
+        </div>
+    </section>
+
+
+
+    <section class="slide half-red  no-logo">
+        <div style="width: 40%; padding-right: 0">
+            <h3 style="
+                    font-size: 1.8rem; line-height: 1.33;   margin-bottom: 0rem; ;
+
+                ">Mikalai Saskavets</h3>
+                <span style="line-height: 1.2; font-size: 0.85em;">
+                    I'm a:
+                    <br>— Full Stack Web Developer
+                    <br>— DevOps Enthusiast
+                    <br>
+                    <br>
+                </span>
+            <br>
+            <img src="../kafka-mogilev/pictures/mikalai-photo.png" alt="" width="75%" >
+
+        </div>
+        <div>
+            I'm with:<br>
+            • iTechArt<br>
+            • PyCon Belarus Program Committee<br>
+            • Minsk Python Meetup Program Committee<br>
+        </div>
+    </section>
+
+
+
+
+
+    <section class="slide">
+        <h2 class="shout">the App</h2>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="shout smaller">Django is Awesome for Rapid Development</h2>
+    </section>
+
+
+
+
+    <section class="slide  black">
+        <img src="../kafka-mogilev/pictures/monolith_by_reneaigner.jpg" alt="" class="cover h" style="height: 110%; max-height: 110%">
+        <span class="slide-footer" style="font-size: 12px;" >
+            art by <a href="https://www.deviantart.com/reneaigner/art/Monolith-283096035">René Aigner</a>
+        </span>
+    </section>
+
+
+
+
+    <section class="slide  ">
+        <img src="../kafka-mogilev/pictures/monolith_by_reneaigner_edited.jpg" alt="" class="cover h" style="height: 110%; max-height: 110%">
+        <h3>Monolithic <mark>Rapid Developed</mark> MVP</h3>
+<ul>
+<li>Scalability issues</li>
+<li>Readability issues</li>
+<li>Maintainability issues</li>
+</ul>
+    </section>
+    
+    
+    
+    
+
+    <section class="slide  bg-gradient-pink">
+        <img src="../kafka-mogilev/pictures/microservices-microservices-everywhere.jpeg" alt="" class="cover">
+    </section>
+
+    <section class="slide bg-gradient-pink"> <!-- EDITED 1 -->
+        <img src="../kafka-mogilev/pictures/mono-to-micro-4-even-more-real.png" alt="" class="cover w">
+        <!-- image from: https://medium.com/salesloft-engineering/monolith-to-microservice-without-downtime-a-production-story-652c9b82f03e -->
+    </section>
+
+    <section class="slide bg-gradient-pink"> <!-- EDITED 2 -->
+        <img src="../kafka-mogilev/pictures/mono-to-micro-5-more-relations.png" alt="" class="cover w">
+        <!-- image from: https://medium.com/salesloft-engineering/monolith-to-microservice-without-downtime-a-production-story-652c9b82f03e -->
+    </section>
+
+    <section class="slide bg-gradient-pink"> <!-- EDITED 3 -->
+        <img src="../kafka-mogilev/pictures/mono-to-micro-6-a-lot-of-relations.png" alt="" class="cover w">
+        <!-- image from: https://medium.com/salesloft-engineering/monolith-to-microservice-without-downtime-a-production-story-652c9b82f03e -->
+    </section>
+
+    <style>
+      .lite {
+        color: white!important;
+        border: none!important;
+      }
+      .shadowed {
+        text-shadow: #4A205A 5px 5px 5px
+      }
+      .pinky-bg {
+        background: rgb(134,113,213);
+        background: linear-gradient(
+            90deg,
+            rgba(134,113,213,1) 0%,
+            rgba(146,81,176,1) 40%,
+            rgba(232,137,232,1) 100%
+        );
+      }
+    </style>
+    <section class="slide bg-gradient-pink">
+        <h2 class="lite shadowed">Microservices: Coupling and Cohesion?</h2>
+        <img src="../kafka-mogilev/pictures/distributed-monolith.png" class="cover h">
+        <!-- image from: https://medium.com/salesloft-engineering/monolith-to-microservice-without-downtime-a-production-story-652c9b82f03e -->
+    </section>
+
+
+    <section class="slide bg-gradient-pink"> <!-- EDITED 4 -->
+        <h2 class="lite shadowed">Distributed Monolith?</h2>
+        <img src="../kafka-mogilev/pictures/distributed-monolith.png" class="cover h">
+        <!-- image from: https://medium.com/salesloft-engineering/monolith-to-microservice-without-downtime-a-production-story-652c9b82f03e -->
+    </section>
+
+
+
+
+    <section class="slide">
+        <h2>Here we are</h2>
+        <img src="pictures/4-ms-aws-only-5-services.svg" alt="" class="cover">
+    </section>
+
+
+
+
+    <style>
+       .cover.w.hotfix {
+           margin-top: 5%; width: 90%
+       }
+    </style>
+    <section class="slide">
+        <h2>Synchronous Communication</h2>
+        <img src="pictures/stolp-5-easy-1.svg" alt="" class="cover">
+    </section>
+
+
+    <section class="slide">
+        <h2>Synchronous Communication</h2>
+        <img src="pictures/stolp-5-hard-many.svg" alt="" class="cover">
+    </section>
+
+
+    <section class="slide ">
+        <h2 class="shout smaller">How to bring a pinch of Async to Django world?</h2>
+        <img src="../kafka-mogilev/pictures/emoji/thinking-face.svg" class="place bottom center">
+    </section>
+
+    <section class="slide">
+        <img src="https://i.ya-webdesign.com/images/celery-transparent-django.png" class="cover">
+        <h2 class="shout"><br><br>Celery</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Microservices</h2>
+        <img src="pictures/4-ms-aws-only-5-services.svg" alt="" class="cover">
+    </section>
+
+    <section class="slide">
+        <h2>Introduce Celery</h2>
+        <img src="pictures/4-ms-aws-only-5-services-and-celery.svg" alt="" class="cover">
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Synchronous Communication</h2>
+        <img src="pictures/stolp-5-hard-many.svg" alt="" class="cover">
+    </section>
+    <section class="slide">
+        <h2>~Async Communication (Celery)</h2>
+        <img src="pictures/stolp-5-and-celery.svg" alt="" class="cover">
+    </section>
+
+
+    <section class="slide">
+        <h2>~Async Communication (Celery)</h2>
+        <img src="pictures/stolp-5-and-celery.svg" alt="" class="cover" style="opacity: 0.3">
+        <h3 class="shout">
+
+            <img src="../kafka-mogilev/pictures/emoji/thinking-face.svg">
+            <style>
+            .stroke-big-white {
+                text-shadow: white 5px 5px 0px,
+                             white -5px 5px 0px,
+                             white 5px -5px 0px,
+                             white -5px -5px 0px,
+
+                             white 8px 8px 0px,
+                             white -8px 8px 0px,
+                             white 8px -8px 0px,
+                             white -8px -8px 0px;
+            }
+            </style>
+            <span class="stroke-big-white">
+                <br>
+                shall we use
+                <br>
+                Kafka here???
+            </span>
+        </h3>
+    </section>
+
+
+
+
+    <section class="slide">
+        <h2 class="shout">
+            What is
+            <span style="display: inline-block;  height: 20px;">
+                <img src="../kafka-mogilev/pictures/logos/kafka-logo-black.png" height="90px" style="
+                    position: relative;
+                    float: left;
+                    margin-top: -45px;
+                    opacity: 0.75;">
+            </span>
+            Kafka?
+        </h2>
+    </section>
+    
+    
+    <section class="slide">
+        <h2 class="shout" style="font-size: 64px">
+            Released in 2011 by LinkedIn
+        </h2>
+    </section>
+
+
+    <section class="slide">
+
+        <h2 class="shout" style="font-size: 64px">
+            Distributed Streaming Platform
+        </h2>
+
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="shout">
+            Kafka for what??
+        </h2>
+    </section>
+
+
+    <section class="slide">
+        <h2>
+            Kafka for what??
+        </h2>
+
+        <ul class="semi-huge">
+            <li>Messaging
+            <li>Metrics
+            <li>Log Aggregation
+            <li>Website Activity Tracking
+            <li>Queue
+            <li>... and others ...
+        </ul>
+    </section>
+
+
+
+    
+    
+
+    <section class="slide" id="alter-cust">
+        <h2>
+            Alternatives for Kafka
+        </h2>
+        
+        
+        <style>
+        #alter-cust .slighty-centerized
+        {   
+            display: inline-block;
+            margin-left: -1em;
+            color: #4f2fbe;
+            font-weight: bold;/*
+            border: 1px solid #4f2fbe;
+            border-radius: 100%;
+            padding: 0.1em;
+            line-height: 1;
+            text-align: center;
+            vertical-align: center;
+            width: 1.3em;
+            height: 1.3em; /**/
+        }
+        </style>
+        
+        
+        <div class="huge" style="float:left; width: 33%;">
+        <span class="slighty-centerized">1</span>
+        <ul>
+            <li> RabbitMQ</li>
+            <li> ActiveMQ</li>
+        </ul>
+        </div>
+        
+        <div class="huge" style="float:left; width: 33%;">
+        <span class="slighty-centerized">2</span>
+        <ul>
+            <li> NATS</li>
+            <li> Apache Pulsar
+            <li> Artemis</li>
+        </ul>
+        </div>
+        
+        <div class="huge" style="float:left; width: 33%;">
+        <span class="slighty-centerized">3</span>
+        <ul>
+            <li> AWS Kinesis</li>
+        </ul>
+        </div>
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Some throughput comparsion</h2>
+        <img src="pictures/kafka-performance-comp-2.png" class="cover" style="height: 440px; margin-top: 20px;">
+        <div class="slide-footer" style="bottom: 0.5rem; font-size:10px">
+            Data from <a href="https://softwaremill.com/mqperf/">SoftwareMill</a>
+        </div>
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Some throughput comparsion</h2>
+        <img src="pictures/kafka-performance-comp-1.png" class="cover" style="height: 440px; margin-top: 20px;">
+        <div class="slide-footer" style="bottom: 0.5rem; font-size:10px">
+            Data from <a href="https://bravenewgeek.com/dissecting-message-queues/">Brave New Geek</a>
+        </div>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="shout">
+            Why Kafka???
+        </h2>
+    </section>
+
+
+
+    <section class="slide">
+        <h2>
+            Why Kafka???
+        </h2>
+        <ul class="huge">
+            <li>impressive performance
+                <ul class="huge">
+                <li>up to 2,000,000 messages per sec </span>
+                    <a  href="https://engineering.linkedin.com/kafka/benchmarking-apache-kafka-2-million-writes-second-three-cheap-machines"
+                        style="font-size: 0.5em;background: none;transform: translate(98px,-5px);display: inline-block;"
+                        >or even more [↪]</a></li>
+                </ul>
+            </li>
+            <li>highly scalable</li>
+            <li>pretty mature</li>
+        </ul>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="shout">
+            Kafka: Overview
+        </h2>
+    </section>
+    
+
+    <section class="slide ">
+        <h2>Kafka: Overview</h2>
+        <img src="pictures/kafka-cluster.svg" alt="" class="cover" style="height: 75%">
+    </section>
+    
+    
+    <section class="slide ">
+        <h2>Kafka Cluster</h2>
+        <img src="pictures/kafka-cluster-inside.svg" alt="" class="cover" style="height: 70%">
+    </section>
+
+
+
+
+    <section class="slide">
+        <h2>Let's start with something simple</h2>
+        <h3 class="shout" style="font-size: 42px">
+            <span>1 topic</span>
+            <br>
+            <span><mark>2</mark> partitions per topic</span>
+            <br>
+            <span>1 consumers group</span>
+            <br>
+            <span>1 consumer in group</span>
+            <br>
+            <span>1 producer</span>
+        </h3>
+    </section>
+
+
+
+    <section class="slide ">
+        <h2>Something simple ;-)</h2>
+        <img src="pictures/kafka-producer-consumer.svg" alt="" class="cover" style="height: 80%">
+    </section>
+
+
+
+    <section class="slide ">
+        <h2>Messages flow</h2>
+        <img src="pictures/kafka-messages-flow.svg" alt="" class="cover" style="height: 80%">
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Strategies to put a message to a specific partiton</h2>
+        <ul class="semi-huge">
+            <li>random</li>
+            <li>by key:</li>
+            <ul>
+                <li><code>CRC32(message.key)</code></li>
+                <li><code>Murmur2(message.key)</code></li>
+            </ul>
+            <li>...</li>
+        </ul>
+    </section>
+    
+
+    <section class="slide">
+        <h2>Kafka: Message (Record) Format</h2>
+        <pre><code class="normal-in-center huge no-skip-first-line plain">            
+length: varint
+attributes: int8
+    bit 0~7: unused
+timestampDelta: varint
+offsetDelta: varint
+keyLength: varint
+key: byte[]
+valueLen: varint
+value: byte[]
+Headers => [Header]
+        </code></pre>
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Kafka: Message</h2>
+            <pre><code class="plain" style="line-height: 1; font-size: 72px; font-weight: bold; transform: translateX(10%)">
+  key: byte[ ]
+value: byte[ ]
+</code></pre>
+    </section>
+
+
+    <section class="slide">
+        <h2>Kafka: Message: Serialization</h2>
+        <pre><code class="normal-in-center huge no-skip-first-line ">            
+msg = Message()
+msg['key'] = custom.serialize("some key value")
+msg['value'] = custom.serialize( {
+                                    "foo": "1",
+                                    "bar": 1
+                                 } )
+        </code></pre>
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Kafka: Serializers</h2>
+        <h3 class="shout no-bg">
+            <small style="font-size: 0.5em">
+                JSON, Protobuf, Thrift, <mark>Avro</mark>
+            </small>
+        </h3>
+    </section>
+
+
+    <section class="slide">
+        <h2>Avro: Pros</h2>
+        <ol class="semi-huge">
+            <li>platform independent</li>
+            <li>binary compressed data</li>
+            <li>schema <span style="color:#aaa">(in JSON format)</span></li>
+            <li>schema migration flow</li>
+            <li>schema is in the message or somewhere outside</li>
+            <li>...</li>
+        </ol>
+    </section>
+
+
+    <section class="slide">
+        <h2 style="border: none">Kafka: Schema overhead</h2>
+        <img src="pictures/confluent_schema_registry-1-0.png" alt="" class="cover" style="margin-top: 30px">
+        <span class="slide-footer">
+        Fig. from <a href="https://www.confluent.io/blog/schemas-contracts-compatibility">confluent.io</a>
+        </span> 
+    </section>
+
+
+
+
+
+    <section class="slide">
+        <h2 style="border: none">Kafka: Schema overhead</h2>
+        <table id="table-schema-overhead">
+            <style>#table-schema-overhead td:last-child { color: red } </style>
+            <tr>
+                <td>Approach</td>
+                <td>Schema</td>
+                <td>Payload</td>
+                <td>Total</td>
+                <td>Overhead</td>
+            </tr>
+            <tr>
+                <td>JSON (Schemaless)</td>
+                <td>0</td>
+                <td>74</td>
+                <td>74</td>
+                <td>~ 2x</td>
+            </tr>
+            <tr>
+                <td>Schema + Avro Payload</td>
+                <td>204</td>
+                <td>34</td>
+                <td>238</td>
+                <td>~ 6x</td>
+            </tr>
+            <tr>
+                <td>Schema ID + Avro Payload</td>
+                <td>4</td>
+                <td>34</td>
+                <td>38</td>
+                <td>&nbsp;&nbsp; 1x</td>
+            </tr>
+        </table>
+    </section>
+
+
+    <section class="slide">
+        <h2 class="shout">Where to store Schema?</h2>
+    </section>
+
+
+    <section class="slide">
+        <h2>Kafka: Schema Registry Concept</h2>
+        <img src="../kafka-mogilev/pictures/schema-registry-scheme.svg" alt="" class="cover w" style="margin-top: 20px">
+
+    </section>
+
+
+
+    <section class="slide ">
+        <h2>Messages flow</h2>
+        <img src="pictures/kafka-messages-flow.svg" alt="" class="cover" style="height: 80%">
+    </section>
+
+
+
+    <section class="slide ">
+        <h2>Messages flow (with Schema Registry)</h2>
+        <img src="pictures/kafka-messages-flow-registry.svg" alt="" class="cover" style="height: 80%">
+    </section>
+
+
+
+    <section class="slide ">
+        <h2>Messages flow. Consumer Side<span style="color:lightgray">. Part 1</span></h2>
+        <img src="pictures/kafka-consumer-flow-s1.svg" alt="" class="cover" style="height: 80%">
+    </section>
+    <section class="slide ">
+        <h2>Messages flow. Consumer Side<span style="color:lightgray">. Part 2</span></h2>
+        <img src="pictures/kafka-consumer-flow-s2.svg" alt="" class="cover" style="height: 80%">
+    </section>
+    <section class="slide ">
+        <h2>Messages flow. Consumer Side<span style="color:lightgray">. Part 3</span></h2>
+        <img src="pictures/kafka-consumer-flow-s3.svg" alt="" class="cover" style="height: 80%">
+    </section>
+    <section class="slide ">
+        <h2>Messages flow. Consumer Side<span style="color:lightgray">. Part 4</span></h2>
+        <img src="pictures/kafka-consumer-flow-s4.svg" alt="" class="cover" style="height: 80%">
+    </section>
+    <section class="slide ">
+        <h2>Messages flow. Consumer Side<span style="color:lightgray">. Part 5</span></h2>
+        <img src="pictures/kafka-consumer-flow-s5.svg" alt="" class="cover" style="height: 80%">
+    </section>
+    <section class="slide ">
+        <h2>Messages flow. Consumer Side<span style="color:lightgray">. Part 6</span></h2>
+        <img src="pictures/kafka-consumer-flow-s6.svg" alt="" class="cover" style="height: 80%">
+    </section>
+    
+    
+
+
+
+    <section class="slide">
+        <h2 class="shout">Let's see some code</h2>
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="shout">Do it with Python!</h2>
+    </section>
+
+
+    <section class="slide ">
+        <h2>Python libraries to work with Kafka</h2>
+        <ul class="huge">
+            <li> kafka-python</li>
+            <li> pykafka</li>
+            <li> confluent-kafka</li>
+            <li> aiokafka</li>
+        </ul>
+        
+        <!-- сравнение (2016 год) http://activisiongamescience.github.io/2016/06/15/Kafka-Client-Benchmarking/ -->
+        <!-- сравнение (2017 год) http://matthewrocklin.com/blog/work/2017/10/10/kafka-python -->
+        <!-- еще одно сравнение, без таблиц (2017 год) https://blog.datasyndrome.com/a-tale-of-two-kafka-clients-c613efab49df -->
+        <!-- код для бенчмаркинга: https://github.com/sucitw/benchmark-python-client-for-kafka -->
+        <!-- ^ доклад по этому бенчмарку и общий рассказ про Кафку https://speakerdeck.com/sucitw/connect-k-of-smack-pykafka-kafka-python-or?slide=25 -->
+
+    </section>
+
+
+
+
+    <section class="slide ">
+        <h2>What to choose?</h2>
+        <table>
+            <tr>
+                <td></td>
+                <td>kafka-python</td>
+                <td>pykafka</td>
+                <td>confluent-kafka</td>
+            </tr>
+            <tr>
+                <td>Stars on GitHub</td>
+                <td>~ 3 400</td>
+                <td style="color: red">~ 1 000</td>
+                <td>~ 1 500</td>
+            </tr>
+            <tr>
+                <td>Contributors*</td>
+                <td>0 / 4 / 13 / 186</td>
+                <td>1 / 5 / 10 / 77</td>
+                <td>0 / 1 / 6 / 57</td>
+            </tr>
+            <tr>
+                <td>Releases track</td>
+                <td>fine</td>
+                <td>hm… <sup style="color: red">(2018???)</sup></td>
+                <td>fine</td>
+            </tr>
+            <tr>
+                <td>Development track</td>
+                <td>fine</td>
+                <td>hm…</td>
+                <td>fine</td>
+            </tr>
+        </table>
+
+        <span class="slide-footer" style="font-size: 16px; padding: 0px 0px; text-align: left; opacity: 0.4">
+            <pre><code class="plain" style="line-height: 1.15em">*
+  a / b / c / d
+  a — with more 1k commits
+  100 ≤ b &lt; 1000
+   10 ≤ c &lt; 100
+  d — all contributors</code></pre>
+        </span>
+
+    </section>
+
+
+    <section class="slide ">
+        <h2>What about Throughput?<span style="color:lightgray"> Some benchmarks</span></h2>
+        <style>
+        .slide table.striped tr:nth-child(even) { background: rgba(64, 64, 64, .35) }
+        .special-throughput tr td:last-child, .special-throughput td {
+             text-align: right ;
+                 font-family: PT Mono, monospace;
+
+             }
+         .special-throughput .a-right { text-align: right; }
+         .special-throughput .very-good { background: rgba(32, 64, 96, .15) }
+        </style>
+        <table class="special-throughput" style="font-size: 32px">
+              <thead>
+                <tr style="text-align: right;">
+                  <th></th>
+                  <th class="a-right">time (s)</th>
+                  <th class="a-right">MBs/s</th>
+                  <th class="a-right">Msgs/s</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- CONSUMER -->
+                <tr class="very-good">
+                  <th>confluent-kafka</th>
+                  <td>5.4</td>
+                  <td>17</td>
+                  <td>183 000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>kafka-python</th>
+                  <td>68</td>
+                  <td>1.4</td>
+                  <td>15 000</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+        </table>
+
+        <div class="slide-footer">
+            benchmarking by <a href="http://matthewrocklin.com/blog/work/2017/10/10/kafka-python">Matthew Rocklin</a>
+        </div>
+
+    </section>
+
+
+
+    <section class="slide">
+        <h2 class="shout smaller">
+            confluent-kafka<span style="color:lightgray">-python</span>
+        </h2>
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Some preparations</h2>
+        <pre><code class="normal-in-center language-python">
+
+        # vars.py            
+        import sys
+        
+        
+        server = sys.argv[1]    # &lt;-- kafka server url
+        registry = sys.argv[2]  # &lt;-- schema registry url
+
+        
+        topic = sys.argv[3]     # &lt;-- topic name
+        
+        group = sys.argv[0]     # &lt;-- consumer group id
+        </code></pre>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <section class="slide">
+        <h2>Kafka Producer on Python</h2>
+        <pre><code class="normal-in-center"><span class="underlined-block">
+import vars
+from confluent_kafka import Producer
+conf = {'bootstrap.servers': vars.server}
+
+
+
+</span>
+
+
+
+producer = Producer(**conf)
+
+for num in range(1000):
+    producer.produce(vars.topic, <mark>value=str(num)</mark>)
+
+
+# Wait until all messages have been delivered
+producer.flush()
+    </code></pre>
+
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Kafka Producer on Python</h2>
+        <pre><code class="normal-in-center"><span class="underlined-block">
+import vars
+from confluent_kafka import Producer
+conf = {'bootstrap.servers': vars.server}
+
+
+
+</span>
+
+
+
+producer = Producer(**conf)
+
+for num in range(1000):
+    producer.produce(vars.topic, <mark>value=str(num)</mark>,
+                                   <mark>key=str(num)</mark>)
+
+# Wait until all messages have been delivered
+producer.flush()
+    </code></pre>
+
+    </section>
+
+
+
+
+
+
+
+
+    <section class="slide">
+        <h2>Kafka Consumer on Python</h2>
+        <pre><code class="normal-in-center"><span class="underlined-block">
+import vars
+from confluent_kafka import Consumer
+conf = {'bootstrap.servers': vars.server,
+        'group.id': vars.group,
+        'enable.auto.commit': 'true'}
+        </span>
+
+consumer = Consumer(conf)
+consumer.subscribe([vars.topic])
+try:
+    while True:
+        message = c.poll(timeout=1.0)
+        if message is None: continue
+        else:
+            print(message)
+finally:
+    consumer.close() # ... to commit final offsets.
+        </code></pre>
+
+    </section>
+
+
+
+
+
+
+    <section class="slide">
+        <h2>Avro Schema for messages</h2>
+        <pre><code class="normal-in-center language-python no-skip-first-line">
+# avro_schemas.py
+from confluent_kafka import avro
+
+record_schema = avro.loads("""
+    {
+        "namespace": "example.net.foobar.serialization.avro",
+        "name": "FooBar",
+        "type": "record",
+        "fields": [
+            {"name": "foo", "type": "string"},
+            {"name": "bar", "type": "int"},
+        ]
+    }
+""")
+        </code></pre>
+
+    </section>
+
+
+
+
+
+
+
+    <section class="slide">
+        <h2>Kafka Producer with Avro</h2>
+        <pre><code class="normal-in-center"><span class="underlined-block">
+import vars
+from confluent_kafka.avro import AvroProducer
+from <mark>avro_schemas</mark> import record_schema
+
+conf = {'bootstrap.servers': vars.server,
+        'schema.registry.url': vars.registry}</span>
+
+producer = AvroProducer(conf, default_value_schema=record_schema)
+
+for num in range(1000):
+    producer.produce(vars.topic, 
+                     value=<mark>{"foo": str(num), "bar": num}</mark>)
+
+
+# Wait until all messages have been delivered
+producer.flush()
+    </code></pre>
+
+    </section>
+
+
+
+    <section class="slide">
+        <h2>Kafka Producer with Avro</h2>
+        <pre><code class="normal-in-center"><span class="underlined-block">
+import vars
+from confluent_kafka.avro import AvroProducer
+from <mark>avro_schemas</mark> import record_schema
+
+conf = {'bootstrap.servers': vars.server,
+        'schema.registry.url': vars.registry}</span>
+
+producer = AvroProducer(conf, default_value_schema=record_schema)
+
+for num in range(1000):
+    producer.produce(vars.topic, 
+                     value={"foo": str(num), "bar": num},
+                     <mark>value_schema</mark>=record_schema)
+
+# Wait until all messages have been delivered
+producer.flush()
+    </code></pre>
+
+    </section>
+
+
+
+
+
+    <section class="slide">
+        <h2>Kafka Consumer with Avro</h2>
+        <pre><code class="normal-in-center language-python"><span class="underlined-block">
+import vars
+from confluent_kafka.avro import AvroConsumer
+
+
+conf = {'bootstrap.servers': vars.server, 'group.id': vars.group,
+        'schema.registry.url': vars.registry}</span>
+
+consumer = AvroConsumer(conf)
+consumer.subscribe([vars.topic])
+try:
+    while True:
+        message = c.poll(timeout=1.0)
+        if message is None: continue
+        else:
+            print(message.<mark>value()['bar']</mark>)
+finally:
+    consumer.close() # ... to commit final offsets.
+        </code></pre>
+
+    </section>
+
+
+    
+    <section class="slide ">
+        <h2>Launch Kafka Consumer with Django</h2>
+        <pre><code class="normal-in-center no-skip-first-line language-shell">
+            
+            
+            
+        ./manage.py run_kafka_consumer
+        </code></pre>
+    </section>
+    
+    
+    <section class="slide ">
+        <h2 class="shout">Microservices!<br>Go Ahead!</h2>
+    </section>
+
+
+    <section class="slide">
+        <h2>With Celery</h2>
+        <img src="pictures/4-ms-aws-only-5-services-and-celery.svg" alt="" class="cover">
+    </section>
+    <section class="slide">
+        <h2>With Kafka</h2>
+        <img src="pictures/4-ms-aws-only-5-services-and-kafka.svg" alt="" class="cover">
+    </section>
+    
+    
+    <section class="slide">
+        <h2>~Async Communication (Celery)</h2>
+        <img src="pictures/stolp-5-and-celery.svg" alt="" class="cover">
+    </section>
+    <section class="slide">
+        <h2>~Async Communication (Kafka)</h2>
+        <img src="pictures/stolp-5-kafka.svg" alt="" class="cover">
+    </section>
+
+
+    
+    
+    <section class="slide">
+        <h2>With Kafka</h2>
+        <img src="pictures/4-ms-aws-only-5-services-and-kafka.svg" alt="" class="cover">
+    </section>
+    
+    <section class="slide">
+        <h2>With Kafka<span style="color:lightgray">. Don't forget about databases</span></h2>
+        <img src="pictures/services-kafka-dbs.svg" alt="" class="cover" style="width: 85%">
+    </section>
+    <section class="slide">
+        <h2>~Async Communication (Kafka)</h2>
+        <img src="pictures/stolp-5-kafka.svg" alt="" class="cover">
+    </section>
+    <section class="slide">
+        <h2>What if we have few databases?</h2>
+        <img src="pictures/stolp-5-kafka-dbs.svg" alt="" class="cover">
+    </section>
+    
+    
+
+    <section class="slide ">
+        <h2>Relational Database → Kafka</h2>
+        <img src="../kafka-mogilev/pictures/logos/debezium.svg" class="cover" style="background: black; padding: 50px; width: 70%;">
+    </section>
+    
+    
+
+
+    <section class="slide">
+        <h2>Stream data from RDBS to Kafka</h2>
+        <img src="../kafka-mogilev/pictures/debezium-architecture.png" alt="" class="cover w" style="width: 90%">
+        <span class="slide-footer">
+        Fig. from <a href="
+https://debezium.io/documentation/reference/0.9/architecture.html">debezium.io</a>
+        </span>
+    </section>
+
+
+    <section class="slide">
+        <h2>Stream data from PostgreSQL to Kafka</h2>
+        <img src="../kafka-mogilev/pictures/debezium-architecture-part-postgre.png" alt="" class="cover w" style="margin-top: 30px">
+        <span class="slide-footer">
+        Fig. from <a href="
+https://debezium.io/documentation/reference/0.9/architecture.html">debezium.io</a>
+        </span>
+    </section>
+
+
+    
+    <section class="slide">
+        <h2>With Kafka and databases</h2>
+        <img src="pictures/services-kafka-dbs.svg" alt="" class="cover" style="width: 85%">
+    </section>
+    
+    <section class="slide">
+        <h2>Introduce Debezium</h2>
+        <img src="pictures/services-kafka-dbs-debezium.svg" alt="" class="cover" style="width: 90%">
+    </section>
+    
+
+
+    <section class="slide">
+        <h2>What if we have few databases?</h2>
+        <img src="pictures/stolp-5-kafka-dbs.svg" alt="" class="cover">
+    </section>
+
+
+
+    <section class="slide">
+        <h2>How Debezium helps us</h2>
+        <img src="pictures/stolp-5-kafka-dbs-debezium.svg" alt="" class="cover">
+    </section>
+
+
+    <section class="slide">
+        <h2>Application Diagram</h2>
+        <img src="pictures/services-kafka-dbs-debezium.svg" alt="" class="cover" style="width: 90%">
+    </section>
+    
+    
+    <section class="slide">
+        <h2>Application Diagram<span style="color:lightgray">. Rearrange a bit</span></h2>
+        <img src="pictures/4-ms-aws-without-wordpress-and-crawlers.svg" alt="" class="cover w">
+    </section>
+
+
+    <section class="slide">
+        <h2>Application Diagram + External Data Handling</h2>
+        <img src="pictures/4-ms-aws-without-wordpress.svg" alt="" class="cover w">
+    </section>
+    
+    
+
+
+
+
+    <section class="slide">
+        <h2>Application Diagram + Marketing Website</h2>
+        <img src="pictures/4-ms-aws-full.svg" alt="" class="cover w">
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+    <section class="slide ">
+        <h2 class="shout">Summary?</h2>
+    </section>
+
+
+    <!--
+    <section class="slide red">
+        <h2>Summary</h2>
+        <ul>
+            <li>На каком-то этапе вам придётся переписать ваш монолитный MVP</li>
+            <li>Используйте микросервисы, если вы готовы ломать свои устои</li>
+            <li>Прогнозируете высокую нагрузку - готовьтесь погрузиться в мир Highload</li>
+            <li>Не используйте Кафку, если не ожидаете действительно большой нагрузки</li>
+            <li>Кафка - довольно сложная технология, как в применении, так и в понимании</li>
+            <li>В микросервисном мире язык программирования перестаёт быть во главе угла</li>
+        </ul>
+    </section>
+    -->
+
+
+
+
+    <section class="slide ">
+        <h2 class="shout">Thanks!</h2>
+    </section>
+
+
+    <section class="slide ">
+        <h2 class="shout">Questions?</h2>
+    </section>
+    
+    
+    <section class="slide clear black"></section>
+    <section class="slide clear black"></section>
+    <section class="slide clear black"></section>
+    
+    <!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    
+                      ДОПОЛНИТЕЛЬНЫЕ СЛАЙДЫ
+    
+    <!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+
+    <section class="slide">
+        <h2>Kafka: Replication</h2>
+        <img src="../kafka-mogilev/pictures/kafka-architecture-replication.svg" alt="" class="cover w" style="margin-top: 30px">
+        <span class="slide-footer">
+        some details on <a href="
+https://dzone.com/articles/kafka-topic-architecture-replication-failover-and">dzone.com</a>
+        </span>
+
+    </section>
+    
+    <section class="slide">
+        <h2>Kafka: Reset Consumer Group Offsets tooling</h2>
+            <pre class="plain" style="margin-top: -2rem"><code >
+  Reset to Datetime
+  Reset from Duration
+  Reset to Earliest
+  Reset to Latest
+  Reset to Current Time
+  Reset to Offset
+  Shift Offset by 'n'
+  Reset from file
+
+            </code></pre>
+    </section>
+
+
+    <section class="slide">
+        <h2>More strategies to put a message to a specific partiton</h2>
+        <ul style="font-size: 18px">
+            <li>random</li>
+            <li>by key:</li>
+            <ul>
+                <li><code>CRC32(message.key)</code></li>
+                <li><code>CRC32(message.key)</code> + random if no key or key value is NULL</li>
+                <li><code>Murmur(message.key)</code></li>
+                <li><code>Murmur(message.key)</code> + random if no key or key value is NULL</li>
+                <li><code>Murmur2(message.key)</code></li>
+                <li><code>Murmur2(message.key)</code> + random if no key or key value is NULL</li>
+                <li><code>custom_function(message.key)</code></li>
+            </ul>
+            <li><code>custom_function(message)</code></li>
+        </ul>
+    </section>
+    
+    
+    <div class="progress"></div>
+
+    <footer class="badge">
+        <a href="https://github.com/shurph/talks">Fork me on GitHub!</a>
+    </footer>
+
+    <script src="../vendor/shower/scripts/shower.min.js"></script>
+
+    <script src="../vendor/shower/vendors/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+
+</html>

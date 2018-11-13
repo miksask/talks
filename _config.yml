@@ -1,0 +1,19 @@
+# Каталоги с "_" Jekyll иначе не публикует.
+include:
+  - _shared
+  - _vendor
+
+# Свой exclude в Jekyll 3 заменяет список по умолчанию, поэтому он повторён.
+# index.md — исходник Marp; опубликованные слайды лежат в index.html рядом.
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - mpm-hf-2025/index.md

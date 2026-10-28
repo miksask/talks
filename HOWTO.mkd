@@ -8,7 +8,7 @@ some technical moments...
 ```
 npm install decktape
 mkdir pdf-out/
-`npm bin`/decktape --size=1024x576 https://shurph.github.io/talks/kafka-piterpy/ pdf-out/kafka-piterpy-1080p.pdf
+`npm bin`/decktape --size=1024x576 https://miksask.github.io/talks/kafka-piterpy/ pdf-out/kafka-piterpy-1080p.pdf
 ```
 
 The `--size` is important. Decktape can't detect slides ratuo correctly sometimes.

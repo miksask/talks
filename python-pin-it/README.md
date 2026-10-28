@@ -1,6 +1,6 @@
 # Зачем «пинить» пакеты в requirements.txt
 
-[Смотреть слайды.](https://shurph.github.io/talks/python-pin-it/)
+[Смотреть слайды.](https://miksask.github.io/talks/python-pin-it/)
 
 Выступил с этим докладом 
 [*2019-01-12* на Minsk Python Meetup](https://www.facebook.com/MinskPythonMeetup/posts/1957640570999253) в баре

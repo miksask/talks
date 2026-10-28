@@ -4,6 +4,6 @@
 Этот каталог является артефактом неверного выбора структуры каталогов для репозитория.
 
 Он нужен, чтобы предоставлять редирект для ссылки
-https://shurph.github.io/talks/slides/2018-python-pipenv/
+https://miksask.github.io/talks/slides/2018-python-pipenv/
 на
-https://shurph.github.io/talks/pipenv/
+https://miksask.github.io/talks/pipenv/

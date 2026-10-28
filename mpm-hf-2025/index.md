@@ -11,7 +11,7 @@ backgroundSize: cover
 
 ## с сообществом Minsk Python Meetup <br><br> Куда контрибьютить: 30+ курируемых Python-репозиториев
 <!---
-backgroundImage: url('https://shurph.github.io/talks/mpm-hf-2025/bg-white-nodes.png')
+backgroundImage: url('https://miksask.github.io/talks/mpm-hf-2025/bg-white-nodes.png')
 --->
 
 ---
@@ -259,7 +259,7 @@ footer: "Hacktoberfest 2025 Kick-off с сообществом Minsk Python Meet
 Program Committee Chair, Organizer & Host @ Minsk Python Meetup
 
 - Telegram: [@MikalaiSaskavets](https://t.me/MikalaiSaskavets)
-- GitHub: [@shurph](https://github.com/shurph)
+- GitHub: [@miksask](https://github.com/miksask)
 
 &nbsp;
 

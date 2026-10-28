@@ -10,5 +10,5 @@ cat *json | grep recorded | sed 's=\("recorded": "\)[^[]\+=\1=g' | sed 's=\("rec
 for FN in *json; do cat $FN | sed 's=\("recorded": "\)[^[]\+=\1=g' | sed 's=\("recorded": "\)[^0-9]\+\([0-9\.]\+\)]=\1\2=g' | sed 's=recorded[^0-9]\+\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)=recorded": "\3-\2-\1=g' | sponge $FN; done 
 for FN in *json; do jq -S '. +{speaker:.speakers[0]}' $FN | sponge $FN ; done
 cat *json | grep speaker\"| sed 's=\(speaker": "\)[^/]*/[ ]*\([^/^"^[]\+\)[^"]\+=\1\2='
-https://github.com/shurph/pyvideo-data/tree/cli-tricks
-https://gist.github.com/shurph/dbb242505226aa33d784997134987bd8
+https://github.com/miksask/pyvideo-data/tree/cli-tricks
+https://gist.github.com/miksask/dbb242505226aa33d784997134987bd8

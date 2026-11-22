@@ -4,7 +4,7 @@ include:
   - _vendor
 
 # Свой exclude в Jekyll 3 заменяет список по умолчанию, поэтому он повторён.
-# index.md — исходник Marp; опубликованные слайды лежат в index.html рядом.
+# index.md и slides-deck.md — исходники Marp; опубликованные слайды лежат в index.html рядом.
 exclude:
   - .sass-cache/
   - .jekyll-cache/
@@ -17,3 +17,7 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - mpm-hf-2025/index.md
+  - aiba-agent-boundaries/slides-deck.md
+  - devai-agent-failures/slides-deck.md
+  - pycon-wroclaw-hitl/slides-deck.md
+  - python-summit-agentops/slides-deck.md

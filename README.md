@@ -1,7 +1,9 @@
 
+- [aiba-agent-boundaries](aiba-agent-boundaries/)
 - [change-data-capture](change-data-capture/)
 - [change-data-capture-gomel](change-data-capture-gomel/)
 - [cli-tricks](cli-tricks/)
+- [devai-agent-failures](devai-agent-failures/)
 - [django-security](django-security/)
 - [git-brest](git-brest/)
 - [git-next](git-next/)
@@ -11,6 +13,7 @@
 - [mpm-hf-2025](mpm-hf-2025/)
 - [opensource-taking-part](opensource-taking-part/)
 - [pipenv](pipenv/)
+- [pycon-wroclaw-hitl](pycon-wroclaw-hitl/)
 - [python-2-is-dead](python-2-is-dead/)
 - [python-choose-it](python-choose-it/)
 - [python-dependencies-under-control](python-dependencies-under-control/)
@@ -18,3 +21,4 @@
 - [python-manage-dependencies](python-manage-dependencies/)
 - [python-pin-it](python-pin-it/)
 - [python-pypa-joke](python-pypa-joke/)
+- [python-summit-agentops](python-summit-agentops/)

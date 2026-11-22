@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1160 340"
+   width="1160"
+   height="340"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="05-approval-fatigue-shift--light.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.92123168"
+     inkscape:cx="601.91157"
+     inkscape:cy="108.55033"
+     inkscape:window-width="1432"
+     inkscape:window-height="963"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg10" />
+  <title
+     id="title">The alert storm moved</title>
+  <desc
+     id="desc">Comparison showing that AI triage can reduce raw alert review while introducing repeated approval requests. Qualitative illustration, not a measured before and after result.</desc>
+  <defs
+     id="defs2">
+    <marker
+       id="arrow-dark-teal"
+       viewBox="0 0 12 12"
+       refX="12"
+       refY="6"
+       markerWidth="12"
+       markerHeight="12"
+       markerUnits="userSpaceOnUse"
+       orient="auto">
+      <path
+         d="M0 0 L12 6 L0 12 Z"
+         fill="#126275"
+         id="path1" />
+    </marker>
+    <marker
+       id="arrow-red"
+       viewBox="0 0 12 12"
+       refX="12"
+       refY="6"
+       markerWidth="12"
+       markerHeight="12"
+       markerUnits="userSpaceOnUse"
+       orient="auto">
+      <path
+         d="M0 0 L12 6 L0 12 Z"
+         fill="#E27070"
+         id="path2" />
+    </marker>
+  </defs>
+  <g
+     id="comparison">
+    <text
+       x="32"
+       y="38"
+       fill="#4A6870"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="14"
+       font-weight="600"
+       letter-spacing="1.5"
+       dominant-baseline="central"
+       id="text2">BEFORE AI-ASSISTED TRIAGE</text>
+    <text
+       x="32"
+       y="208"
+       fill="#4A6870"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="14"
+       font-weight="600"
+       letter-spacing="1.5"
+       dominant-baseline="central"
+       id="text3">AFTER AI-ASSISTED TRIAGE</text>
+    <rect
+       x="40"
+       y="64"
+       width="264"
+       height="64"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect3" />
+    <text
+       x="172.0"
+       y="96.0"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text4">Raw alert stream</text>
+    <line
+       x1="304"
+       y1="100"
+       x2="416"
+       y2="100"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line4" />
+    <rect
+       x="424"
+       y="64"
+       width="304"
+       height="64"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect4" />
+    <text
+       x="576.0"
+       y="96.0"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text5">Engineer reviews each</text>
+    <rect
+       x="40"
+       y="234"
+       width="264"
+       height="64"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect5" />
+    <text
+       x="172.0"
+       y="266.0"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text6">AI groups evidence</text>
+    <line
+       x1="304"
+       y1="270"
+       x2="416"
+       y2="270"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line6" />
+    <rect
+       x="424"
+       y="234"
+       width="304"
+       height="64"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect6" />
+    <text
+       x="576"
+       y="266"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20px"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text7">Fewer alerts to reviews</text>
+    <line
+       x1="728"
+       y1="270"
+       x2="840"
+       y2="270"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line7" />
+    <rect
+       x="848"
+       y="234"
+       width="272"
+       height="80"
+       rx="8"
+       fill="#192833"
+       stroke="#192833"
+       stroke-width="2"
+       id="rect7" />
+    <text
+       x="984.0"
+       y="262.0"
+       fill="#FFFFFF"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text8">Repeated approval</text>
+    <text
+       x="984.0"
+       y="286.0"
+       fill="#FFFFFF"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="16"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text9">requests</text>
+    <text
+       x="580"
+       y="174"
+       fill="#4A6870"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="18"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text10">The source of interruption changes</text>
+  </g>
+</svg>

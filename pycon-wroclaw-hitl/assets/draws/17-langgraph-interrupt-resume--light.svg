@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1160 420"
+   width="1160"
+   height="420"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg20"
+   sodipodi:docname="17-langgraph-interrupt-resume--light.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview20"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.5033544"
+     inkscape:cx="622.16521"
+     inkscape:cy="374.89698"
+     inkscape:window-width="1474"
+     inkscape:window-height="798"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg20" />
+  <title
+     id="title">LangGraph interrupt and resume sequence</title>
+  <desc
+     id="desc">The approval node stores pending state and interrupts. A decision resumes the same checkpointed thread. LangGraph re-enters the interrupted node from its beginning, so pre-interrupt code must be free of side effects; the effect node runs only after validation.</desc>
+  <defs
+     id="defs2">
+    <marker
+       id="arrow-dark-teal"
+       viewBox="0 0 12 12"
+       refX="12"
+       refY="6"
+       markerWidth="12"
+       markerHeight="12"
+       markerUnits="userSpaceOnUse"
+       orient="auto">
+      <path
+         d="M0 0 L12 6 L0 12 Z"
+         fill="#126275"
+         id="path1" />
+    </marker>
+    <marker
+       id="arrow-left-dark-teal"
+       viewBox="0 0 12 12"
+       refX="0"
+       refY="6"
+       markerWidth="12"
+       markerHeight="12"
+       markerUnits="userSpaceOnUse"
+       orient="auto">
+      <path
+         d="M12 0 L0 6 L12 12 Z"
+         fill="#126275"
+         id="path2" />
+    </marker>
+  </defs>
+  <g
+     id="lifelines">
+    <line
+       x1="148"
+       y1="88"
+       x2="148"
+       y2="352"
+       stroke="#126275"
+       stroke-width="1.5"
+       stroke-opacity="0.4"
+       stroke-dasharray="6 6"
+       id="line2" />
+    <line
+       x1="432"
+       y1="88"
+       x2="432"
+       y2="352"
+       stroke="#126275"
+       stroke-width="1.5"
+       stroke-opacity="0.4"
+       stroke-dasharray="6 6"
+       id="line3" />
+    <line
+       x1="716"
+       y1="88"
+       x2="716"
+       y2="352"
+       stroke="#126275"
+       stroke-width="1.5"
+       stroke-opacity="0.4"
+       stroke-dasharray="6 6"
+       id="line4" />
+    <line
+       x1="1000"
+       y1="88"
+       x2="1000"
+       y2="352"
+       stroke="#126275"
+       stroke-width="1.5"
+       stroke-opacity="0.4"
+       stroke-dasharray="6 6"
+       id="line5" />
+  </g>
+  <g
+     id="messages">
+    <line
+       x1="148"
+       y1="128"
+       x2="424"
+       y2="128"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line6" />
+    <line
+       x1="148"
+       y1="184"
+       x2="708"
+       y2="184"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line7" />
+    <line
+       x1="708"
+       y1="240"
+       x2="440"
+       y2="240"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-left-dark-teal)"
+       id="line8" />
+    <line
+       x1="424"
+       y1="296"
+       x2="156"
+       y2="296"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-left-dark-teal)"
+       id="line9" />
+    <line
+       x1="156"
+       y1="352"
+       x2="992"
+       y2="352"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line10" />
+  </g>
+  <g
+     id="participants">
+    <text
+       x="32"
+       y="28"
+       fill="#4A6870"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="14"
+       font-weight="600"
+       letter-spacing="1.5"
+       dominant-baseline="central"
+       id="text10">PAUSE, RESUME THE SAME THREAD, VALIDATE, THEN EXECUTE</text>
+    <rect
+       x="32"
+       y="48"
+       width="232"
+       height="40"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect10" />
+    <text
+       x="148"
+       y="68"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text11">Approval node</text>
+    <rect
+       x="316"
+       y="48"
+       width="232"
+       height="40"
+       rx="8"
+       fill="#192833"
+       stroke="#192833"
+       stroke-width="2"
+       id="rect11" />
+    <text
+       x="432"
+       y="68"
+       fill="#FFFFFF"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text12">Checkpointed thread</text>
+    <rect
+       x="600"
+       y="48"
+       width="232"
+       height="40"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect12" />
+    <text
+       x="716"
+       y="68"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text13">Human / Chainlit</text>
+    <rect
+       x="884"
+       y="48"
+       width="232"
+       height="40"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect13" />
+    <text
+       x="1000"
+       y="68"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text14">Effect node</text>
+  </g>
+  <g
+     id="message-labels">
+    <rect
+       x="209.53166"
+       y="109.50186"
+       width="159.43483"
+       height="26.498137"
+       fill="#ffffff"
+       id="rect14" />
+    <text
+       x="290"
+       y="122"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="16"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text15">Persist pending gate</text>
+    <rect
+       x="333.55649"
+       y="165.50186"
+       width="185.88326"
+       height="25.496885"
+       fill="#ffffff"
+       id="rect15" />
+    <text
+       x="428"
+       y="178"
+       fill="#192833"
+       font-family="'JetBrains Mono', Menlo, Consolas, monospace"
+       font-size="16"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text16">interrupt(pending)</text>
+    <rect
+       x="456"
+       y="220"
+       width="248"
+       height="28"
+       fill="#FFFFFF"
+       id="rect16" />
+    <text
+       x="580"
+       y="234"
+       fill="#192833"
+       font-family="'JetBrains Mono', Menlo, Consolas, monospace"
+       font-size="16"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text17">Command(resume=decision)</text>
+    <rect
+       x="170.52049"
+       y="275.49939"
+       width="228.45592"
+       height="27.999989"
+       fill="#ffffff"
+       id="rect17"
+       ry="0.50062084" />
+    <text
+       x="286"
+       y="290"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="16"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text18">Same thread_id; node restarts</text>
+    <rect
+       x="512.55029"
+       y="330.99875"
+       width="224.9019"
+       height="29.501873"
+       fill="#ffffff"
+       id="rect18" />
+    <text
+       x="624"
+       y="346"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="16px"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text19">Approved decision only</text>
+    <text
+       x="625.46686"
+       y="359.89523"
+       fill="#192833"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="16px"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text19-8"
+       style="font-size:12px">(Reject or escalate → another state transition, no effect)</text>
+  </g>
+  <g
+     id="safety-note"
+     transform="translate(0,14)">
+    <text
+       x="580"
+       y="396"
+       fill="#4a6870"
+       font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif"
+       font-size="16px"
+       font-weight="400"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text20">Keep pre-interrupt code free of side effects.</text>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:32px;font-family:'Avenir Next';-inkscape-font-specification:'Avenir Next';writing-mode:lr-tb;direction:ltr;fill:#f2f9f9;fill-opacity:0.426923"
+     x="524.0968"
+     y="379.09137"
+     id="text1"><tspan
+       sodipodi:role="line"
+       id="tspan1"></tspan></text>
+</svg>

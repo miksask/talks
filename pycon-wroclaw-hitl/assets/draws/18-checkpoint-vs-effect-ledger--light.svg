@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1160 444"
+   width="1160"
+   height="444"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg16"
+   sodipodi:docname="18-checkpoint-vs-effect-ledger--light.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview16"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="3.5018654"
+     inkscape:cx="515.15401"
+     inkscape:cy="113.36815"
+     inkscape:window-width="1481"
+     inkscape:window-height="847"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg16" />
+  <title
+     id="title">Checkpoint is not the effect ledger</title>
+  <desc
+     id="desc">The external effect commits and returns a receipt, but the workflow runtime crashes before the graph checkpoint records success. A resumed run retries with the same operation ID, and the effect service and ledger return the existing receipt or reconcile uncertain state.</desc>
+  <defs
+     id="defs2">
+    <marker
+       id="arrow-dark-teal"
+       viewBox="0 0 12 12"
+       refX="12"
+       refY="6"
+       markerWidth="12"
+       markerHeight="12"
+       markerUnits="userSpaceOnUse"
+       orient="auto">
+      <path
+         d="M0 0 L12 6 L0 12 Z"
+         fill="#126275"
+         id="path1" />
+    </marker>
+    <marker
+       id="arrow-muted"
+       viewBox="0 0 12 12"
+       refX="12"
+       refY="6"
+       markerWidth="12"
+       markerHeight="12"
+       markerUnits="userSpaceOnUse"
+       orient="auto">
+      <path
+         d="M0 0 L12 6 L0 12 Z"
+         fill="#6F858C"
+         id="path2" />
+    </marker>
+  </defs>
+  <g
+     id="sequence"
+     font-family="'Instrument Sans', 'Helvetica Neue', Arial, sans-serif">
+    <!-- Participants -->
+    <rect
+       x="64"
+       y="28"
+       width="248"
+       height="64"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect2" />
+    <text
+       x="188"
+       y="60"
+       fill="#192833"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text2">Workflow runtime</text>
+    <rect
+       x="456"
+       y="28"
+       width="248"
+       height="64"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect3" />
+    <text
+       x="580"
+       y="60"
+       fill="#192833"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text3">Graph checkpoint</text>
+    <rect
+       x="848"
+       y="28"
+       width="248"
+       height="64"
+       rx="8"
+       fill="#F2F9F9"
+       stroke="#126275"
+       stroke-width="2"
+       id="rect4" />
+    <text
+       x="972"
+       y="60"
+       fill="#192833"
+       font-size="20"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text4">Effect service + ledger</text>
+    <!-- Lifelines -->
+    <line
+       x1="188"
+       y1="92"
+       x2="188"
+       y2="392"
+       stroke="#126275"
+       stroke-width="1.5"
+       stroke-linecap="round"
+       stroke-dasharray="6 8"
+       id="line4" />
+    <line
+       x1="580"
+       y1="92"
+       x2="580"
+       y2="392"
+       stroke="#126275"
+       stroke-width="1.5"
+       stroke-linecap="round"
+       stroke-dasharray="6 8"
+       id="line5" />
+    <line
+       x1="972"
+       y1="92"
+       x2="972"
+       y2="392"
+       stroke="#126275"
+       stroke-width="1.5"
+       stroke-linecap="round"
+       stroke-dasharray="6 8"
+       id="line6" />
+    <!-- 1 -->
+    <line
+       x1="188"
+       y1="132"
+       x2="972"
+       y2="132"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line7" />
+    <rect
+       x="466.5658"
+       y="116.57112"
+       width="225.15503"
+       height="30.286633"
+       fill="#ffffff"
+       id="rect7" />
+    <text
+       x="580"
+       y="132"
+       fill="#192833"
+       font-size="16"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text7">1 · call with stable operation_id</text>
+    <!-- 2 -->
+    <line
+       x1="972"
+       y1="180"
+       x2="188"
+       y2="180"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line8" />
+    <rect
+       x="396.00745"
+       y="164"
+       width="370.26959"
+       height="33.14225"
+       fill="#ffffff"
+       id="rect8" />
+    <text
+       x="580"
+       y="180"
+       fill="#192833"
+       font-size="16"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text8">2 · effect committed; receipt stored and returned</text>
+    <!-- Crash occurs after the effect but before checkpoint success is recorded -->
+    <rect
+       x="178"
+       y="195"
+       width="20"
+       height="28"
+       fill="#FFFFFF"
+       id="rect9" />
+    <line
+       x1="180"
+       y1="199"
+       x2="196"
+       y2="215"
+       stroke="#E27070"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line9" />
+    <line
+       x1="196"
+       y1="199"
+       x2="180"
+       y2="215"
+       stroke="#E27070"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line10" />
+    <text
+       x="139"
+       y="207"
+       fill="#E27070"
+       font-size="16"
+       font-weight="600"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text10">CRASH</text>
+    <!-- 3: failed checkpoint write -->
+    <line
+       x1="188"
+       y1="236"
+       x2="550"
+       y2="236"
+       stroke="#6F858C"
+       stroke-width="2"
+       stroke-linecap="round"
+       stroke-dasharray="8 7"
+       marker-end="url(#arrow-muted)"
+       id="line11" />
+    <rect
+       x="236.71657"
+       y="220"
+       width="271.9957"
+       height="32"
+       fill="#ffffff"
+       id="rect11" />
+    <text
+       x="373"
+       y="236"
+       fill="#4A6870"
+       font-size="16"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text11">3 · checkpoint write did not complete</text>
+    <line
+       x1="556"
+       y1="228"
+       x2="570"
+       y2="242"
+       stroke="#E27070"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line12" />
+    <line
+       x1="570"
+       y1="228"
+       x2="556"
+       y2="242"
+       stroke="#E27070"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line13" />
+    <!-- 4 -->
+    <line
+       x1="188"
+       y1="332"
+       x2="972"
+       y2="332"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line14" />
+    <rect
+       x="445.13373"
+       y="316.28555"
+       width="268.87585"
+       height="31.428885"
+       fill="#ffffff"
+       id="rect14" />
+    <text
+       x="580"
+       y="332"
+       fill="#192833"
+       font-size="16"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text14">4 · resume retries same operation_id</text>
+    <!-- 5 -->
+    <line
+       x1="972"
+       y1="380"
+       x2="188"
+       y2="380"
+       stroke="#126275"
+       stroke-width="2"
+       stroke-linecap="round"
+       marker-end="url(#arrow-dark-teal)"
+       id="line15" />
+    <rect
+       x="461.99149"
+       y="364"
+       width="234.0181"
+       height="30.857752"
+       fill="#ffffff"
+       id="rect15" />
+    <text
+       x="580"
+       y="380"
+       fill="#192833"
+       font-size="16"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text15">5 · existing receipt or reconcile</text>
+    <!-- Summary -->
+    <text
+       x="580"
+       y="420"
+       fill="#4A6870"
+       font-size="16"
+       text-anchor="middle"
+       dominant-baseline="central"
+       id="text16">Checkpoint records workflow progress; downstream idempotency or reconciliation handles effect uncertainty.</text>
+  </g>
+</svg>
